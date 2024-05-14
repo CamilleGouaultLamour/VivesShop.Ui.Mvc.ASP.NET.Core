@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6">
+            <h2>Shop Items</h2>
+            @foreach (var shopItem in Model.ShopItems)
+            {
+                <div class="col-12">
+                    <form action="@Url.Action("AddToCart", "Home")" method="post">
+                        <button type="submit" class="btn btn-light" name="shopItemId" value="@shopItem.Id">@shopItem.Name (€ @shopItem.Price) + </button>
+                    </form>
+                </div>
+            }
+        </div>
+        <div class="col-6">
+            <h2>Shopping Cart</h2>
+            @foreach (var shopItem in Model.ShoppingCartItems)
+            {
+                <div class="col-12">
+                    <form action="@Url.Action("RemoveFromCart", "Home")" method="post">
+                        <button type="submit" class="btn btn-warning" name="shopItemId" value="@shopItem.Id">@shopItem.Name (€ @shopItem.Price) - </button>
+                    </form>
+                </div>
+            }
+            <h3>Totaal: € @Model.TotalAmount</h3>
+
+            <form action="@Url.Action("Checkout", "Home")" method="post">
+                <button type="submit" class="btn btn-primary">Checkout</button>
+            </form>
+        </div>
+    </div>
+</div>

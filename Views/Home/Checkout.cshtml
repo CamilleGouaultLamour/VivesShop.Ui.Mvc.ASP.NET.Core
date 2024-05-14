@@ -1,0 +1,78 @@
+﻿@model ShoppingCart
+@{
+    ViewBag.Title = "Checkout Page";
+}
+
+<div class="container-fluid text-center">
+    <div class="row">
+        <h1>@ViewBag.Title</h1>
+
+        <h2 class="text-center mt-5 mb-3">Summary of your order</h2>
+        @if (Model.TotalAmount <= 0)
+        {
+            <h4>Your cart is empty!</h4>
+        }
+        else
+        {
+            <ul class="list-unstyled">
+                @foreach (var shopItem in Model.ShoppingCartItems)
+                {
+                    <li>@shopItem.Name (€ @shopItem.Price)</li>
+                }
+            </ul>
+
+            @if (!Model.IsPaid)
+            {
+                <h2 class="text-center mt-5 mb-3">Payment options</h2>
+                <div class="col-6 col-md-4 mt-3">
+                    <form class="text-center" action="@Url.Action("Pay", "Home")" method="post">
+                        <button class="btn btn-light btn-lg btn-block" name="PaymentMethod" value="Credit/Debit Card">Credit/Debit Card</button>
+                    </form>
+                </div>
+                <div class="col-6 col-md-4 mt-3">
+                    <form class="text-center" action="@Url.Action("Pay", "Home")" method="post">
+                        <button type="submit" class="btn btn-light btn-lg btn-block" name="PaymentMethod" value="PayPal">PayPal</button>
+                    </form>
+                </div>
+                <div class="col-6 col-md-4 mt-3">
+                    <form class="text-center" action="@Url.Action("Pay", "Home")" method="post">
+                        <button type="submit" class="btn btn-light btn-lg btn-block" name="PaymentMethod" value="Bank Transfer">Bank Transfer</button>
+                    </form>
+                </div>
+                <br />
+                <div class="col-6 col-md-4 mt-3">
+                    <form class="text-center" action="@Url.Action("Pay", "Home")" method="post">
+                        <button type="submit" class="btn btn-light btn-lg btn-block" name="PaymentMethod" value="Digital Wallet">Digital Wallet</button>
+                    </form>
+                </div>
+                <div class="col-6 col-md-4 mt-3">
+                    <form class="text-center" action="@Url.Action("Pay", "Home")" method="post">
+                        <button type="submit" class="btn btn-light btn-lg btn-block" name="PaymentMethod" value="Bitcoin">Bitcoin</button>
+                    </form>
+                </div>
+                <div class="col-6 col-md-4 mt-3">
+                    <form class="text-center" action="@Url.Action("Pay", "Home")" method="post">
+                        <button type="submit" class="btn btn-light btn-lg btn-block" name="PaymentMethod" value="Cash on Delivery">Cash on Delivery</button>
+                    </form>
+                </div>
+                <div class="col-6 col-md-4 mt-3">
+                    <form class="text-center" action="@Url.Action("Pay", "Home")" method="post">
+                        <button type="submit" class="btn btn-light btn-lg btn-block" name="PaymentMethod" value="Gift Card">Gift Card</button>
+                    </form>
+                </div>
+
+                <h3 class="mt-3 mb-3">Totaal: € @Model.TotalAmount</h3>
+            }
+            else
+            {
+                <h4>You have already payed with @Model.PaymentMethod</h4>
+            }
+        }
+
+        <form class="mt-5" action="@Url.Action("Index", "Home")" method="post">
+            <button type="submit" class="btn btn-primary">Continue Shopping ⮌</button>
+        </form>
+        
+        
+    </div>
+</div>

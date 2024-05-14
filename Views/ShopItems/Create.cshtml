@@ -1,0 +1,12 @@
+﻿@model ShopItem
+@{
+    ViewBag.Title = "Create Shop Item";
+}
+
+<h1>@ViewBag.Title</h1>
+
+<form method="post">
+    <partial name="CreateEditPartial" model="Model" />
+    
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>

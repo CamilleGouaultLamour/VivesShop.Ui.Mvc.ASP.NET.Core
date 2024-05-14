@@ -1,0 +1,26 @@
+﻿@model ShopItem
+
+<tr>
+    <td>@Model.Name</td>
+    <td>
+        <p>€ @Model.Price</p>
+    </td>
+    <td>
+        <div class="row">
+            <div class="col-auto pr-1">
+                <form action="@Url.Action("AddToCart", "Home")" method="post">
+                    <button type="submit" class="btn btn-light" name="shopItemId" value="@Model.Id">+1</button>
+                </form>
+            </div>
+            <div class="col-auto pl-0">
+                <form action="@Url.Action("RemoveFromCart", "Home")" method="post">
+                    <button type="submit" class="btn btn-warning" name="shopItemId" value="@Model.Id">-1</button>
+                </form>
+            </div>
+        </div>
+     </td>
+    <td>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+    </td>
+</tr>
